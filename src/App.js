@@ -58,7 +58,7 @@ class App extends Component {
           </Comments>          
         ))}
 
-        <form method="post" onSubmit={this.addComment}>
+        <form className="New-comment" method="post" onSubmit={this.addComment}>
           <h2>Adicionar Comentário</h2>
           <div>
             <input
@@ -66,6 +66,7 @@ class App extends Component {
               name="name" 
               value={this.state.newComment.name}
               onChange={this.setValuesWhenChangeValueOnInput}
+              required
               placeholder="Digite o seu nome aqui:"
             />
           </div>
@@ -75,6 +76,7 @@ class App extends Component {
               name="email"
               value={this.state.newComment.email}
               onChange={this.setValuesWhenChangeValueOnInput}
+              required
               placeholder="Digite o seu email aqui:"
             />
           </div>
@@ -84,6 +86,7 @@ class App extends Component {
               value={this.state.newComment.mensage}
               onChange={this.setValuesWhenChangeValueOnInput}
               rows='4'
+              required
               placeholder='Deixe aqui sua mensagem:'
             />
           </div>            
