@@ -1,30 +1,57 @@
 import Comments from './components/Comments';
 import './App.css';
 import logo from './logo.svg';
+import { Component } from 'react';
 
-function App() {
-  return (
-    <div className="App">
-      <h1 className='header'>
-        <img className="custom-logo" src={logo} alt="Logo" />
-        Meu projeto
-        <img className="custom-logo right-logo-padding" src={logo} alt="Logo" />
-      </h1>   
+class App extends Component {
 
-      <Comments name="André" email="andre@mail.com" date={new Date()}>
-        Comentário do André
-      </Comments>
+  state = {
+    comments: [
+      {
+        id: 1231231230,
+        name: 'André',
+        email: 'andre@mail.com',
+        date: new Date(),
+        mensage: 'Mensagem no array André',
+      },
+      {
+        id: 4564564560,
+        name: 'Maria',
+        email: 'maira@mail.com',
+        date: new Date(),
+        mensage: 'Mensagem no array Maria',
+      },
+      {
+        id: 7897897890,
+        name: 'João',
+        email: 'joão@mail.com',
+        date: new Date(),
+        mensage: 'Mensagem no array João',
+      },
+    ]
+  }
 
-      <Comments name="João" email="joao@mail.com" date={new Date()}>
-        Comentário do João
-      </Comments>
+  render () {
+    return (
+      <div className="App">
+        <h1 className='header'>
+          <img className="custom-logo" src={logo} alt="Logo" />
+          Meu projeto
+          <img className="custom-logo right-logo-padding" src={logo} alt="Logo" />
+        </h1>   
 
-      <Comments name="Maria" email="maria@mail.com" date={new Date()}>
-        Comentário da Maria
-      </Comments>
-
-    </div>    
-  );
+        {this.state.comments.map((comments, index) => (
+          <Comments
+            key={index} 
+            name={comments.name} 
+            email={comments.email}
+            date={comments.date}>
+            {comments.mensage}
+          </Comments>          
+        ))}        
+      </div>    
+    );
+  }  
 }
 
 export default App;
