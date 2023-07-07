@@ -13,6 +13,7 @@ const Comments = (props) => {
         <p>{props.children}</p>
         <p>Olá esse é o componente de comentários{somaNumeros(numero1, numero2)}</p>
         <p>{formattedDate}</p>
+        <button onClick={props.onRemove}>&times;</button>
     </div>
     )
 };

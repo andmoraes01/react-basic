@@ -51,12 +51,14 @@ class App extends Component {
             key={index} 
             name={comments.name} 
             email={comments.email}
-            date={comments.date}>
+            date={comments.date}
+            onRemove={this.deleteComment.bind(this, comments)}
+            >            
             {comments.mensage}
           </Comments>          
         ))}
 
-        <form method="post" onSubmit={this.addComments}>
+        <form method="post" onSubmit={this.addComment}>
           <h2>Adicionar Comentário</h2>
           <div>
             <input
@@ -91,7 +93,7 @@ class App extends Component {
     );
   }
   
-  addComments = (event) => {
+  addComment = (event) => {
     event.preventDefault();
     const id = this.setIdForNewComment();
     const newComment = {
@@ -103,6 +105,12 @@ class App extends Component {
       comments:[...this.state.comments, newComment],
       newComment: {name: '', email:'', mensage:''}
     })
+  }
+
+  deleteComment = comment => {
+    let list = this.state.comments;
+    list = list.filter(filteredComment => filteredComment !== comment);
+    this.setState({comments: list});
   }
 
   setValuesWhenChangeValueOnInput = event => {
