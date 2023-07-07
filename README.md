@@ -1,18 +1,19 @@
 # react-basic
 A project to practice react concepts. Here we will learn and test all studies carried out.
 
+# Implemented items (In progress...)
+This section will describe concepts that are used in implementation of this project. 
+Each topic was approaches techniques and methodologies applicated to implement the system.
 
-# Itens implementados (Em andamento...)
-This section will descrever concepts that are used in implementation of this project. Each topic was described techniques and methodologies applicated to implement the system.
-# Conceitos Básicos e Sintaxe
-- Criação de um projeto em React do zero;
-- Configuração do github para commits de código;
-- Criação de componentes utilizando JSX:
-    - Passando propriedades aos componentes;
-- Anterando estados da aplicação utilizando o método setState();
-- Manipulação de eventos;
-- Estilização dos componentes através do CSS;
-- Instalação de pacotes adicionais para formatação de datas;
+# Basic Concepts and Syntax
+- Creation of a project in React from scratch;
+- Github configuration for code commits;
+- Component creation using JSX:
+    - Passing properties to components;
+- Presetting application states using the setState() method;
+- Event handling;
+- Styling of components through CSS;
+- Installing additional packages for formatting dates;
 
 # Usando o react com requisições HTTP / Ajax
 
