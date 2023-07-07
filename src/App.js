@@ -28,7 +28,13 @@ class App extends Component {
         date: new Date(),
         mensage: 'Mensagem no array João',
       },
-    ]
+    ],
+    newComment:{
+      name:'',
+      email:'',
+      mensage:'',
+      id:''
+    }
   }
 
   render () {
@@ -50,31 +56,63 @@ class App extends Component {
           </Comments>          
         ))}
 
-        <button onClick={this.addComments}>
-          Adicionar um comentário
-        </button>        
-      
+        <form method="post" onSubmit={this.addComments}>
+          <h2>Adicionar Comentário</h2>
+          <div>
+            <input
+              type="text"
+              name="name" 
+              value={this.state.newComment.name}
+              onChange={this.setValuesWhenChangeValueOnInput}
+              placeholder="Digite o seu nome aqui:"
+            />
+          </div>
+          <div>
+            <input
+              type="email"
+              name="email"
+              value={this.state.newComment.email}
+              onChange={this.setValuesWhenChangeValueOnInput}
+              placeholder="Digite o seu email aqui:"
+            />
+          </div>
+          <div>
+            <textarea
+              name='mensage'
+              value={this.state.newComment.mensage}
+              onChange={this.setValuesWhenChangeValueOnInput}
+              rows='4'
+              placeholder='Deixe aqui sua mensagem:'
+            />
+          </div>            
+          <button type='submit'> Adicionar um comentário </button>
+        </form>
       </div>    
     );
   }
   
-  addComments = () => {
-
+  addComments = (event) => {
+    event.preventDefault();
+    const id = this.setIdForNewComment();
     const newComment = {
-      id: 1234567890,
-      name: 'Pedro',
-      email: 'pedro@mail.com',
+      ...this.state.newComment, 
       date: new Date(),
-      mensage: 'Comentário do Pedro'
+      id: id
     }
-    
-    // FEZENDO A CÓPIA DO ARRAY E ADICIONANDO UM NOVO ELEMENTO 
-    // let list = this.state.comments;
-    // list.push(newComment);    
-    // this.setState({comments: list});   
     this.setState({
-      comments:[...this.state.comments, newComment]
+      comments:[...this.state.comments, newComment],
+      newComment: {name: '', email:'', mensage:''}
     })
+  }
+
+  setValuesWhenChangeValueOnInput = event => {
+    const {name,value} = event.target;   
+    this.setState({ newComment: {...this.state.newComment, [name]: value}})
+  }
+
+  setIdForNewComment = () =>{
+   const id = Math.floor(Math.random() * 9000000000) + 1000000000;
+   return id;
   }
 }
 
