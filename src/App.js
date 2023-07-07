@@ -48,10 +48,34 @@ class App extends Component {
             date={comments.date}>
             {comments.mensage}
           </Comments>          
-        ))}        
+        ))}
+
+        <button onClick={this.addComments}>
+          Adicionar um comentário
+        </button>        
+      
       </div>    
     );
-  }  
+  }
+  
+  addComments = () => {
+
+    const newComment = {
+      id: 1234567890,
+      name: 'Pedro',
+      email: 'pedro@mail.com',
+      date: new Date(),
+      mensage: 'Comentário do Pedro'
+    }
+    
+    // FEZENDO A CÓPIA DO ARRAY E ADICIONANDO UM NOVO ELEMENTO 
+    // let list = this.state.comments;
+    // list.push(newComment);    
+    // this.setState({comments: list});   
+    this.setState({
+      comments:[...this.state.comments, newComment]
+    })
+  }
 }
 
 export default App;
