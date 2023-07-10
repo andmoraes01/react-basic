@@ -78,6 +78,16 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        
+        <nav>
+          <ul>
+            <li><a href="/"> Início </a></li>
+            <li><a href="/usuarios"> Usuários Cadastrados </a></li>
+            <li><a href="/adicionar"> Adicionar Usuários </a></li>
+            <li><a href="/comentarios"> Comentários </a></li>
+          </ul>
+        </nav>
+        
         <h1 className="header">
           <img className="custom-logo" src={logo} alt="Logo" />
           Meu projeto
