@@ -8,37 +8,37 @@ class Users extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      usuarios: [
-        { id: 1, nome: 'João', sobrenome: 'Silva', email: 'joao@mail.com' },
-        { id: 2, nome: 'Maria', sobrenome: 'Santos', email: 'maria@mail.com' }
+      users: [
+        { id: 1, name: 'João', lastName: 'Silva', email: 'joao@mail.com' },
+        { id: 2, name: 'Maria', lastName: 'Santos', email: 'maria@mail.com' }
       ]
     }
 
-    this.adicionarUsuario = this.adicionarUsuario.bind(this)
+    this.addUser = this.addUser.bind(this)
   }
 
-  adicionarUsuario(usuario) {
-    const usuarios = [...this.state.usuarios, usuario]
-    this.setState({ usuarios: usuarios })
+  addUser(user) {
+    const users = [...this.state.users, user]
+    this.setState({ users: users })
   }
 
-  removerUsuario(usuario) {
-    if (window.confirm(`Tem certeza que deseja remover "${usuario.nome} ${usuario.sobrenome}"?`)) {
-      let usuarios = this.state.usuarios
-      usuarios = usuarios.filter(x => x.id !== usuario.id)
-      this.setState({ usuarios: usuarios })
+  removeUser(user) {
+    if (window.confirm(`Tem certeza que deseja remover "${user.name} ${user.lastName}"?`)) {
+      let users = this.state.users
+      users = users.filter(x => x.id !== user.id)
+      this.setState({ users: users })
     }
   }
 
   render() {
     return (
       <>
-        <AddUser adicionarUsuario={this.adicionarUsuario} />
+        <AddUser addUser={this.addUser} />
 
-        {this.state.usuarios.map(usuario => (
-          <User key={usuario.id}
-            usuario={usuario}
-            removerUsuario={this.removerUsuario.bind(this, usuario)}
+        {this.state.users.map(user => (
+          <User key={user.id}
+            user={user}
+            removeUser={this.removeUser.bind(this, user)}
           />
         ))}
       </>

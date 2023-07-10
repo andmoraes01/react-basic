@@ -8,7 +8,7 @@ class AddUser extends Component {
     super(props)
 
     this.state = { 
-      usuario: { nome: '', sobrenome: '', email: '' } 
+      user: { name: '', lastName: '', email: '' } 
     }
 
     this.onChangeHandler = this.onChangeHandler.bind(this)
@@ -17,52 +17,52 @@ class AddUser extends Component {
 
   onChangeHandler(event) {
     const { name, value } = event.target
-    this.setState({ usuario: { ...this.state.usuario, [name]: value } })
+    this.setState({ user: { ...this.state.user, [name]: value } })
   }
 
   onSubmitHandler(event) {
     event.preventDefault()
     const id = Math.floor(Math.random() * 1000)
-    const usuario = { ...this.state.usuario, id }
+    const user = { ...this.state.user, id }
 
-    this.setState({ usuario: { nome: '', sobrenome: '', email: '' } })
-    this.props.adicionarUsuario(usuario)
+    this.setState({ user: { name: '', lastName: '', email: '' } })
+    this.props.addUser(user)
   }
 
   render() {
     return (
-      <div className="AdicionarUsuario">
+      <div className="AddUser">
         <h2>Adicionar Usuário</h2>
         <form onSubmit={this.onSubmitHandler}>
-          <div className="Linha">
-            <div className="Coluna">
+          <div className="Line">
+            <div className="Column">
               <label>Nome</label>
               <input
                 type="text"
-                name="nome"
-                value={this.state.usuario.nome}
+                name="name"
+                value={this.state.user.name}
                 onChange={this.onChangeHandler}
                 required>
               </input>
             </div>
-            <div className="Coluna">
+            <div className="Column">
               <label>Sobrenome</label>
               <input
                 type="text"
-                name="sobrenome"
-                value={this.state.usuario.sobrenome}
+                name="lastName"
+                value={this.state.user.lastName}
                 onChange={this.onChangeHandler}
                 required>
               </input>
             </div>
           </div>
-          <div className="Linha">
-            <div className="Coluna">
+          <div className="Line">
+            <div className="Column">
               <label>Email</label>
               <input
                 type="email"
                 name="email"
-                value={this.state.usuario.email}
+                value={this.state.user.email}
                 onChange={this.onChangeHandler}
                 required>
               </input>
