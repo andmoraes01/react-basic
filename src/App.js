@@ -1,10 +1,10 @@
-import Comments from './components/Comments';
+import React, { Component } from 'react';
 import './App.css';
 import logo from './logo.svg';
-import { Component } from 'react';
+import Comments from './components/Comments/Comments';
+import AddNewComment from './components/Comments/AddNewComment';
 
 class App extends Component {
-
   state = {
     comments: [
       {
@@ -12,118 +12,93 @@ class App extends Component {
         name: 'André',
         email: 'andre@mail.com',
         date: new Date(),
-        mensage: 'Mensagem no array André',
+        message: 'Mensagem no array André',
       },
       {
         id: 4564564560,
         name: 'Maria',
         email: 'maira@mail.com',
         date: new Date(),
-        mensage: 'Mensagem no array Maria',
+        message: 'Mensagem no array Maria',
       },
       {
         id: 7897897890,
         name: 'João',
         email: 'joão@mail.com',
         date: new Date(),
-        mensage: 'Mensagem no array João',
+        message: 'Mensagem no array João',
       },
     ],
-    newComment:{
-      name:'',
-      email:'',
-      mensage:'',
-      id:''
-    }
+  };
+
+
+  // Função para renderizar os comentários em tela
+  renderComments() {
+    return this.state.comments.map((comment, index) => (
+      <Comments
+        key={index}
+        name={comment.name}
+        email={comment.email}
+        date={comment.date}
+        onRemove={() => this.deleteComment(comment)}
+      >
+        {comment.message}
+      </Comments>
+    ));
   }
 
-  render () {
+  //Funçao para adicionar os comentários, onde recebe os valores "name", "email", "message" como argumentos. 
+  addComment = (name, email, message) => {
+    const id = this.setIdForNewComment();
+    const newComment = {
+      id: id,
+      name: name,
+      email: email,
+      date: new Date(),
+      message: message,
+    };
+    this.setState({
+      comments: [...this.state.comments, newComment],
+    });
+  };
+
+  // Filta os comentários pelo ID para realizar a deleção.
+  deleteComment = (comment) => {
+    const updatedComments = this.state.comments.filter(
+      (c) => c.id !== comment.id
+    );
+    this.setState({ comments: updatedComments });
+  };
+
+  setIdForNewComment = () => {
+    const id = Math.floor(Math.random() * 9000000000) + 1000000000;
+    return id;
+  };
+
+  render() {
     return (
       <div className="App">
-        <h1 className='header'>
+        
+        <nav>
+          <ul>
+            <li><a href="/"> Início </a></li>
+            <li><a href="/usuarios"> Usuários Cadastrados </a></li>
+            <li><a href="/adicionar"> Adicionar Usuários </a></li>
+            <li><a href="/comentarios"> Comentários </a></li>
+          </ul>
+        </nav>
+        
+        <h1 className="header">
           <img className="custom-logo" src={logo} alt="Logo" />
           Meu projeto
           <img className="custom-logo right-logo-padding" src={logo} alt="Logo" />
-        </h1>   
+        </h1>
 
-        {this.state.comments.map((comments, index) => (
-          <Comments
-            key={index} 
-            name={comments.name} 
-            email={comments.email}
-            date={comments.date}
-            onRemove={this.deleteComment.bind(this, comments)}
-            >            
-            {comments.mensage}
-          </Comments>          
-        ))}
+        {this.renderComments()}
 
-        <form className="New-comment" method="post" onSubmit={this.addComment}>
-          <h2>Adicionar Comentário</h2>
-          <div>
-            <input
-              type="text"
-              name="name" 
-              value={this.state.newComment.name}
-              onChange={this.setValuesWhenChangeValueOnInput}
-              required
-              placeholder="Digite o seu nome aqui:"
-            />
-          </div>
-          <div>
-            <input
-              type="email"
-              name="email"
-              value={this.state.newComment.email}
-              onChange={this.setValuesWhenChangeValueOnInput}
-              required
-              placeholder="Digite o seu email aqui:"
-            />
-          </div>
-          <div>
-            <textarea
-              name='mensage'
-              value={this.state.newComment.mensage}
-              onChange={this.setValuesWhenChangeValueOnInput}
-              rows='4'
-              required
-              placeholder='Deixe aqui sua mensagem:'
-            />
-          </div>            
-          <button type='submit'> Adicionar um comentário </button>
-        </form>
-      </div>    
+        <AddNewComment addComment={this.addComment} />
+      </div>
     );
-  }
-  
-  addComment = (event) => {
-    event.preventDefault();
-    const id = this.setIdForNewComment();
-    const newComment = {
-      ...this.state.newComment, 
-      date: new Date(),
-      id: id
-    }
-    this.setState({
-      comments:[...this.state.comments, newComment],
-      newComment: {name: '', email:'', mensage:''}
-    })
-  }
-
-  deleteComment = comment => {
-    let list = this.state.comments;
-    list = list.filter(filteredComment => filteredComment !== comment);
-    this.setState({comments: list});
-  }
-
-  setValuesWhenChangeValueOnInput = event => {
-    const {name,value} = event.target;   
-    this.setState({ newComment: {...this.state.newComment, [name]: value}})
-  }
-
-  setIdForNewComment = () =>{
-   const id = Math.floor(Math.random() * 9000000000) + 1000000000;
-   return id;
   }
 }
 
