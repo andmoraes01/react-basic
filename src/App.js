@@ -3,6 +3,8 @@ import './App.css';
 import logo from './logo.svg';
 import Comments from './components/Comments/Comments';
 import AddNewComment from './components/Comments/AddNewComment';
+import { BrowserRouter as Router, NavLink, Routes, Route} from 'react-router-dom';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
 class App extends Component {
   state = {
@@ -36,11 +38,11 @@ class App extends Component {
   renderComments() {
     return this.state.comments.map((comment, index) => (
       <Comments
-        key={index}
-        name={comment.name}
-        email={comment.email}
-        date={comment.date}
-        onRemove={() => this.deleteComment(comment)}
+      key={index}
+      name={comment.name}
+      email={comment.email}
+      date={comment.date}
+      onRemove={() => this.deleteComment(comment)}
       >
         {comment.message}
       </Comments>
@@ -77,27 +79,49 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        
-        <nav>
-          <ul>
-            <li><a href="/"> Início </a></li>
-            <li><a href="/usuarios"> Usuários Cadastrados </a></li>
-            <li><a href="/adicionar"> Adicionar Usuários </a></li>
-            <li><a href="/comentarios"> Comentários </a></li>
-          </ul>
-        </nav>
-        
-        <h1 className="header">
-          <img className="custom-logo" src={logo} alt="Logo" />
-          Meu projeto
-          <img className="custom-logo right-logo-padding" src={logo} alt="Logo" />
-        </h1>
+      <Router>
+        <div className="App">
 
-        {this.renderComments()}
+          <h1 className="header">
+            <img className="custom-logo" src={logo} alt="Logo" />
+            Meu projeto
+            <img className="custom-logo right-logo-padding" src={logo} alt="Logo" />
+          </h1>
 
-        <AddNewComment addComment={this.addComment} />
-      </div>
+          <nav>
+            <ul>
+              <li
+                ><NavLink to="/"> Início </NavLink>
+              </li>
+              <li>
+                <NavLink to="/usuarios"> Usuários Cadastrados </NavLink>
+              </li>
+              <li>
+                <NavLink to="/adicionar"> Adicionar Usuários </NavLink>
+              </li>
+              <li>
+                <NavLink to="/comentarios"> Comentários </NavLink>
+              </li>
+            </ul>
+          </nav>
+
+          <Routes>    
+            <Route path="/" element={<div />} />
+            <Route path="/usuarios" element={<div />} />
+            <Route path="/adicionar" element={<div />} />
+            <Route path="/comentarios" element={
+              <React.Fragment>
+                {this.renderComments()}
+                <AddNewComment addComment={this.addComment} />
+              </React.Fragment>
+            } />
+            <Route path="*" element={
+              <PageNotFound></PageNotFound>
+            }/>
+          </Routes>
+
+        </div>
+      </Router>
     );
   }
 }
