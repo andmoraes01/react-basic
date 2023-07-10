@@ -3,8 +3,8 @@ import './App.css';
 import logo from './logo.svg';
 import Comments from './components/Comments/Comments';
 import AddNewComment from './components/Comments/AddNewComment';
-import { BrowserRouter as Router, Link, Routes, Route} from 'react-router-dom';
-
+import { BrowserRouter as Router, NavLink, Routes, Route} from 'react-router-dom';
+import PageNotFound from './components/PageNotFound/PageNotFound';
 
 class App extends Component {
   state = {
@@ -82,41 +82,44 @@ class App extends Component {
       <Router>
         <div className="App">
 
-          <nav>
-            <ul>
-              <li
-                ><Link to="/"> Início </Link>
-              </li>
-              <li>
-                <Link to="/usuarios"> Usuários Cadastrados </Link>
-              </li>
-              <li>
-                <Link to="/adicionar"> Adicionar Usuários </Link>
-              </li>
-              <li>
-                <Link to="/comentarios"> Comentários </Link>
-              </li>
-            </ul>
-          </nav>
-
           <h1 className="header">
             <img className="custom-logo" src={logo} alt="Logo" />
             Meu projeto
             <img className="custom-logo right-logo-padding" src={logo} alt="Logo" />
           </h1>
 
+          <nav>
+            <ul>
+              <li
+                ><NavLink to="/"> Início </NavLink>
+              </li>
+              <li>
+                <NavLink to="/usuarios"> Usuários Cadastrados </NavLink>
+              </li>
+              <li>
+                <NavLink to="/adicionar"> Adicionar Usuários </NavLink>
+              </li>
+              <li>
+                <NavLink to="/comentarios"> Comentários </NavLink>
+              </li>
+            </ul>
+          </nav>
+
           <Routes>    
             <Route path="/" element={<div />} />
             <Route path="/usuarios" element={<div />} />
             <Route path="/adicionar" element={<div />} />
-            <Route path="/comentarios/*" element={
+            <Route path="/comentarios" element={
               <React.Fragment>
                 {this.renderComments()}
                 <AddNewComment addComment={this.addComment} />
               </React.Fragment>
             } />
+            <Route path="*" element={
+              <PageNotFound></PageNotFound>
+            }/>
           </Routes>
-          
+
         </div>
       </Router>
     );
