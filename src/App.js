@@ -3,6 +3,8 @@ import './App.css';
 import logo from './logo.svg';
 import Comments from './components/Comments/Comments';
 import AddNewComment from './components/Comments/AddNewComment';
+import { BrowserRouter as Router, Link, Routes, Route} from 'react-router-dom';
+
 
 class App extends Component {
   state = {
@@ -36,11 +38,11 @@ class App extends Component {
   renderComments() {
     return this.state.comments.map((comment, index) => (
       <Comments
-        key={index}
-        name={comment.name}
-        email={comment.email}
-        date={comment.date}
-        onRemove={() => this.deleteComment(comment)}
+      key={index}
+      name={comment.name}
+      email={comment.email}
+      date={comment.date}
+      onRemove={() => this.deleteComment(comment)}
       >
         {comment.message}
       </Comments>
@@ -77,27 +79,46 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        
-        <nav>
-          <ul>
-            <li><a href="/"> Início </a></li>
-            <li><a href="/usuarios"> Usuários Cadastrados </a></li>
-            <li><a href="/adicionar"> Adicionar Usuários </a></li>
-            <li><a href="/comentarios"> Comentários </a></li>
-          </ul>
-        </nav>
-        
-        <h1 className="header">
-          <img className="custom-logo" src={logo} alt="Logo" />
-          Meu projeto
-          <img className="custom-logo right-logo-padding" src={logo} alt="Logo" />
-        </h1>
+      <Router>
+        <div className="App">
 
-        {this.renderComments()}
+          <nav>
+            <ul>
+              <li
+                ><Link to="/"> Início </Link>
+              </li>
+              <li>
+                <Link to="/usuarios"> Usuários Cadastrados </Link>
+              </li>
+              <li>
+                <Link to="/adicionar"> Adicionar Usuários </Link>
+              </li>
+              <li>
+                <Link to="/comentarios"> Comentários </Link>
+              </li>
+            </ul>
+          </nav>
 
-        <AddNewComment addComment={this.addComment} />
-      </div>
+          <h1 className="header">
+            <img className="custom-logo" src={logo} alt="Logo" />
+            Meu projeto
+            <img className="custom-logo right-logo-padding" src={logo} alt="Logo" />
+          </h1>
+
+          <Routes>    
+            <Route path="/" element={<div />} />
+            <Route path="/usuarios" element={<div />} />
+            <Route path="/adicionar" element={<div />} />
+            <Route path="/comentarios/*" element={
+              <React.Fragment>
+                {this.renderComments()}
+                <AddNewComment addComment={this.addComment} />
+              </React.Fragment>
+            } />
+          </Routes>
+          
+        </div>
+      </Router>
     );
   }
 }
