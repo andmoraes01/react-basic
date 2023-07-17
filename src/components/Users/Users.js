@@ -1,48 +1,18 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 
 import AddUser from '../AddUser/AddUser'
 import User from '../User/User'
 
-class Users extends Component {
+function Users () {
 
-  constructor(props) {
-    super(props)
-    this.state = {
-      users: []
-    }
+  const [users, setUsers] = useState([])
 
-    this.addUser = this.addUser.bind(this)
-  }
-
-  addUser(user) {
-    const users = [...this.state.users, user]
-    this.setState({ users: users })
-  }
-
-  removeUser(user) {
-    if (window.confirm(`Tem certeza que deseja remover "${user.name} ${user.lastName}"?`)) {
-
-      fetch(`https://reqres.in/api/users/${user.id}`, {
-        method: 'DELETE'
-      })
-        .then(response => {
-          if (response.ok) {
-            let users = this.state.users
-            users = users.filter(x => x.id !== user.id)
-            this.setState({ users: users })
-          }
-        })
-    }
-  }
-
-  // Este método é executado após o componente se montado: 
-  //Executa o fetch na url da api, pega a resposta, transforma em texto e retorna mostrando os dados em tela.
-  componentDidMount() { 
+  useEffect(() => {
     //Implementando o método GET:
     fetch('https://reqres.in/api/users')
       .then(response => response.json())
       .then(usersData => {
-        const usersDataFormatedForMyStateFormat = usersData.data.map( userData =>{
+        const usersDataFormatedForMyStateFormat = usersData.data.map(userData => {
           return {
             id: userData.id,
             name: userData.first_name,
@@ -51,24 +21,61 @@ class Users extends Component {
           }
         })
         //Atualiza o estado dos usuários, para listagem na tela inicial.
-        this.setState({users: usersDataFormatedForMyStateFormat})
-      })     
+        setUsers({ users: usersDataFormatedForMyStateFormat })
+      })
+  }, [])
+  
+  const addUser = user => {
+    // const users = [...this.state.users, user]
+    // his.setState({ users: users })
+    setUsers(oldUsers => [...oldUsers, user])
   }
 
-  render() {
+  const removeUser = user => {
+    if (window.confirm(`Tem certeza que deseja remover "${user.name} ${user.lastName}"?`)) {
+      fetch(`https://reqres.in/api/users/${user.id}`, {
+        method: 'DELETE'
+      })
+        .then(response => {
+          if (response.ok) {
+            setUsers(users.filter(x => x.id !== user.id))
+          }
+        })
+    }
+  }
+
+  // // Este método é executado após o componente se montado: 
+  // //Executa o fetch na url da api, pega a resposta, transforma em texto e retorna mostrando os dados em tela.
+  // componentDidMount() { 
+  //   //Implementando o método GET:
+  //   fetch('https://reqres.in/api/users')
+  //   .then(response => response.json())
+  //   .then(usersData => {
+  //     const usersDataFormatedForMyStateFormat = usersData.data.map( userData =>{
+  //       return {
+  //         id: userData.id,
+  //         name: userData.first_name,
+  //         lastName: userData.last_name,
+  //         email: userData.email
+  //       }
+  //     })
+  //     //Atualiza o estado dos usuários, para listagem na tela inicial.
+  //     this.setState({users: usersDataFormatedForMyStateFormat})
+  //   })  
+  // }
+
     return (
       <>
-        <AddUser addUser={this.addUser} />
+        <AddUser addUser={addUser} />
 
-        {this.state.users.map(user => (
+        {users.map(user => (
           <User key={user.id}
             user={user}
-            removeUser={this.removeUser.bind(this, user)}
+            removeUser={() => removeUser(user)}
           />
         ))}
       </>
-    )
-  }
+    )  
 }
 
 export default Users
