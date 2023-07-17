@@ -20,14 +20,11 @@ function Users () {
             email: userData.email
           }
         })
-        //Atualiza o estado dos usuários, para listagem na tela inicial.
-        setUsers({ users: usersDataFormatedForMyStateFormat })
+        setUsers(usersDataFormatedForMyStateFormat)
       })
   }, [])
   
   const addUser = user => {
-    // const users = [...this.state.users, user]
-    // his.setState({ users: users })
     setUsers(oldUsers => [...oldUsers, user])
   }
 
@@ -43,26 +40,6 @@ function Users () {
         })
     }
   }
-
-  // // Este método é executado após o componente se montado: 
-  // //Executa o fetch na url da api, pega a resposta, transforma em texto e retorna mostrando os dados em tela.
-  // componentDidMount() { 
-  //   //Implementando o método GET:
-  //   fetch('https://reqres.in/api/users')
-  //   .then(response => response.json())
-  //   .then(usersData => {
-  //     const usersDataFormatedForMyStateFormat = usersData.data.map( userData =>{
-  //       return {
-  //         id: userData.id,
-  //         name: userData.first_name,
-  //         lastName: userData.last_name,
-  //         email: userData.email
-  //       }
-  //     })
-  //     //Atualiza o estado dos usuários, para listagem na tela inicial.
-  //     this.setState({users: usersDataFormatedForMyStateFormat})
-  //   })  
-  // }
 
     return (
       <>
