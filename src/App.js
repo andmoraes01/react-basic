@@ -5,6 +5,7 @@ import Comments from './components/Comments/Comments';
 import AddNewComment from './components/Comments/AddNewComment';
 import { BrowserRouter as Router, NavLink, Routes, Route} from 'react-router-dom';
 import PageNotFound from './components/PageNotFound/PageNotFound';
+import Users from './components/Users/Users'
 
 class App extends Component {
   state = {
@@ -106,7 +107,9 @@ class App extends Component {
           </nav>
 
           <Routes>    
-            <Route path="/" element={<div />} />
+            <Route path="/" element={ 
+              <div className="users"> <Users/> </div>
+            } />
             <Route path="/usuarios" element={<div />} />
             <Route path="/adicionar" element={<div />} />
             <Route path="/comentarios" element={

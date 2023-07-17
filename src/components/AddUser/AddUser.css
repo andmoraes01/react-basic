@@ -1,0 +1,74 @@
+.AddUser {
+    margin: 2rem 0;
+    padding: 1.25rem;
+    background-color: #FFF;
+    background-color: rgb(235, 210, 178);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .14);
+  }
+  
+  .AddUser h2 {
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    color: black;
+    margin: .25rem 0;
+  }
+  
+  .AddUser .Line {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 -.5rem;
+    padding: .5rem 0;
+  }
+  
+  .AddUser .Column {
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: stretch;
+    padding: 0 .5rem;
+  }
+  
+  .AddUser label {
+    display: inline-block;
+    margin-bottom: .5rem;
+  }
+  
+  .AddUser input {
+    display: block;
+    width: stretch;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: black;
+    background-color: #FFF;
+    border: 1px solid burlywood;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  }
+  
+  .AddUser button {
+    color: black;
+    cursor: pointer;
+    display: inline-block;
+    background-color: burlywood;
+    text-align: center;
+    vertical-align: middle;
+    border: 1px solid transparent;
+    padding: .375rem .75rem;
+    margin-top: .25rem;
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out;
+  }
+  
+  .AddUser input:focus, .AddUser button:focus {
+    outline: 0;
+    border-color: rgba(222, 184, 135, 0.63);
+    box-shadow: 0 0 0 .2rem rgb(241, 148, 25);
+  }
+  
+  .AddUser button:hover {
+    background-color: rgba(97, 64, 22, 0.712);
+  }
