@@ -3,9 +3,12 @@ import './App.css';
 import logo from './logo.svg';
 import Comments from './components/Comments/Comments';
 import AddNewComment from './components/Comments/AddNewComment';
-import { BrowserRouter as Router, NavLink, Routes, Route} from 'react-router-dom';
+import { BrowserRouter as Router, NavLink, Routes, Route } from 'react-router-dom';
 import PageNotFound from './components/PageNotFound/PageNotFound';
-import Users from './components/Users/Users'
+import Users from './components/Users/Users';
+import Home from './components/Home/Home';
+import AddUser from './components/AddUser/AddUser';
+import UserDetails from './components/UserDetails/UserDetails';
 
 class App extends Component {
   state = {
@@ -39,11 +42,11 @@ class App extends Component {
   renderComments() {
     return this.state.comments.map((comment, index) => (
       <Comments
-      key={index}
-      name={comment.name}
-      email={comment.email}
-      date={comment.date}
-      onRemove={() => this.deleteComment(comment)}
+        key={index}
+        name={comment.name}
+        email={comment.email}
+        date={comment.date}
+        onRemove={() => this.deleteComment(comment)}
       >
         {comment.message}
       </Comments>
@@ -92,7 +95,7 @@ class App extends Component {
           <nav>
             <ul>
               <li
-                ><NavLink to="/"> Início </NavLink>
+              ><NavLink to="/"> Início </NavLink>
               </li>
               <li>
                 <NavLink to="/usuarios"> Usuários Cadastrados </NavLink>
@@ -106,21 +109,36 @@ class App extends Component {
             </ul>
           </nav>
 
-          <Routes>    
-            <Route path="/" element={ 
-              <div className="users"> <Users/> </div>
+          <Routes>
+            <Route path="/" element={
+              <div> <Home /> </div>
             } />
-            <Route path="/usuarios" element={<div />} />
-            <Route path="/adicionar" element={<div />} />
+
+            <Route path="usuarios/:userId" element ={
+              <UserDetails/> 
+            }/>
+
+            <Route path="/usuarios" element={
+              <div className="users"> <Users />
+              </div>
+            } />
+
+            <Route path="/adicionar" element={
+              <div className="users"> <AddUser />
+              </div>
+            } />
+
             <Route path="/comentarios" element={
               <React.Fragment>
                 {this.renderComments()}
                 <AddNewComment addComment={this.addComment} />
               </React.Fragment>
             } />
+
             <Route path="*" element={
               <PageNotFound></PageNotFound>
-            }/>
+            } />
+
           </Routes>
 
         </div>

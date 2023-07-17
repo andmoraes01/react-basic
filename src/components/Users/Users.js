@@ -24,10 +24,6 @@ function Users () {
       })
   }, [])
   
-  const addUser = user => {
-    setUsers(oldUsers => [...oldUsers, user])
-  }
-
   const removeUser = user => {
     if (window.confirm(`Tem certeza que deseja remover "${user.name} ${user.lastName}"?`)) {
       fetch(`https://reqres.in/api/users/${user.id}`, {
@@ -43,8 +39,6 @@ function Users () {
 
     return (
       <>
-        <AddUser addUser={addUser} />
-
         {users.map(user => (
           <User key={user.id}
             user={user}

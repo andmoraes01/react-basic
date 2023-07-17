@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import './AddUser.css'
 
 
-function AddUser(props) {
+function AddUser() {
 
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -11,21 +11,23 @@ function AddUser(props) {
 
   const onSubmitHandler = event => {
     event.preventDefault();
-    const user = {name, lastName, email};
+    const user = { name, lastName, email };
 
     fetch('https://reqres.in/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user)
     })
-      .then(response => response.json())
-      .then(addUsersData => {
-        resetUserData();
-        props.addUser(addUsersData);
+      .then(response => {
+        if (response.ok) {
+          resetUserData();
+          //criar componente de alerta um componente separado e personalizado
+          alert('Usuário cadastrado com sucesso !');      
+        }
       })
   }
 
-  const resetUserData = () =>{
+  const resetUserData = () => {
     setName('')
     setLastName('')
     setEmail('')
