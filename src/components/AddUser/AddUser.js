@@ -2,15 +2,15 @@ import React, { Component } from 'react'
 
 import './AddUser.css'
 
+const INITIAL_STATE = { 
+  user: { name: '', lastName: '', email: '' } 
+}
+
 class AddUser extends Component {
 
   constructor(props) {
     super(props)
-
-    this.state = { 
-      user: { name: '', lastName: '', email: '' } 
-    }
-
+    this.state = INITIAL_STATE;
     this.onChangeHandler = this.onChangeHandler.bind(this)
     this.onSubmitHandler = this.onSubmitHandler.bind(this)
   }
@@ -22,11 +22,17 @@ class AddUser extends Component {
 
   onSubmitHandler(event) {
     event.preventDefault()
-    const id = Math.floor(Math.random() * 1000)
-    const user = { ...this.state.user, id }
-
-    this.setState({ user: { name: '', lastName: '', email: '' } })
-    this.props.addUser(user)
+    const user = this.state.user
+    fetch('https://reqres.in/api/users', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(user)
+    })
+      .then(response => response.json())
+      .then(addUsersData => {
+        this.setState(INITIAL_STATE);
+        this.props.addUser(addUsersData);
+      })
   }
 
   render() {

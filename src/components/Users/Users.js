@@ -28,15 +28,12 @@ class Users extends Component {
   }
 
   // Este método é executado após o componente se montado: 
-  //Executa o fetch na url da api, pega a resposta, transforma em texto
-  // e retorna mostrando os dados em tela.
+  //Executa o fetch na url da api, pega a resposta, transforma em texto e retorna mostrando os dados em tela.
   componentDidMount() { 
     //Implementando o método GET:
     fetch('https://reqres.in/api/users')
       .then(response => response.json())
       .then(usersData => {
-        console.log(usersData.data)
-
         const usersDataFormatedForMyStateFormat = usersData.data.map( userData =>{
           return {
             id: userData.id,
@@ -45,11 +42,9 @@ class Users extends Component {
             email: userData.email
           }
         })
-
-        console.log(usersDataFormatedForMyStateFormat)
+        //Atualiza o estado dos usuários, para listagem na tela inicial.
         this.setState({users: usersDataFormatedForMyStateFormat})
-      })
-     
+      })     
   }
 
   render() {
