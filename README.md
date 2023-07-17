@@ -16,7 +16,7 @@ Each topic was approaches techniques and methodologies applicated to implement t
 - Installing additional packages for formatting dates;
 
 # 1.2 Using React with requests HTTP / Ajax
-Was maked requests on this API: 'https://reqres.in/api/users'. Here has used GET to get and list users informations, POST to upload and list users informations that was inputed and DELETE metohd to remove informations that was listed on our page.
+Was maked requests on this API: 'https://reqres.in/api'. Here has used GET to get and list users informations, POST to upload and list users informations that was inputed and DELETE metohd to remove informations that was listed on our page.
 
 Concepts that was used:
 - HTTP protocol;
