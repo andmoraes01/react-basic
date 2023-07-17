@@ -8,10 +8,7 @@ class Users extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      users: [
-        { id: 1, name: 'João', lastName: 'Silva', email: 'joao@mail.com' },
-        { id: 2, name: 'Maria', lastName: 'Santos', email: 'maria@mail.com' }
-      ]
+      users: []
     }
 
     this.addUser = this.addUser.bind(this)
@@ -28,6 +25,31 @@ class Users extends Component {
       users = users.filter(x => x.id !== user.id)
       this.setState({ users: users })
     }
+  }
+
+  // Este método é executado após o componente se montado: 
+  //Executa o fetch na url da api, pega a resposta, transforma em texto
+  // e retorna mostrando os dados em tela.
+  componentDidMount() { 
+    //Implementando o método GET:
+    fetch('https://reqres.in/api/users')
+      .then(response => response.json())
+      .then(usersData => {
+        console.log(usersData.data)
+
+        const usersDataFormatedForMyStateFormat = usersData.data.map( userData =>{
+          return {
+            id: userData.id,
+            name: userData.first_name,
+            lastName: userData.last_name,
+            email: userData.email
+          }
+        })
+
+        console.log(usersDataFormatedForMyStateFormat)
+        this.setState({users: usersDataFormatedForMyStateFormat})
+      })
+     
   }
 
   render() {
