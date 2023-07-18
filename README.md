@@ -35,7 +35,7 @@ Each topic was approaches techniques and methodologies applicated to implement t
 - Installing additional packages for formatting dates;
 
 # 1.2 Using React with requests HTTP / Ajax
-Was maked requests on this API: 'https://reqres.in/api/users'. Here has used GET to get and list users informations, POST to upload and list users informations that was inputed and DELETE metohd to remove informations that was listed on our page.
+Was maked requests on this API: 'https://reqres.in/api'. Here has used GET to get and list users informations, POST to upload and list users informations that was inputed and DELETE metohd to remove informations that was listed on our page.
 
 Concepts that was used:
 - HTTP protocol;
@@ -47,8 +47,10 @@ Concepts that was used:
 On this project was used concepts that abord: what is hook and the advantajes to use; rules to use hooks; how can we manipulate states using State Hook and how can we 
 manipulate effects using Effect Hook.
 
-# 1.4 Usando Rotas
-
-# 1.5 Redux
+# 1.4 Using Routes
+- Using routes on SPA (single Page Application)
+- Implementing a nav menu with each route doing your own function
+- Defining routes
+- Using and passing parameters in routes
 
 # 1.7 Deploy
