@@ -28,9 +28,11 @@ Concepts that was used:
 On this project was used concepts that abord: what is hook and the advantajes to use; rules to use hooks; how can we manipulate states using State Hook and how can we 
 manipulate effects using Effect Hook.
 
-# 1.4 Usando Rotas
-
-# 1.5 Redux
+# 1.4 Using Routes
+- Using routes on SPA (single Page Application)
+- Implementing a nav menu with each route doing your own function
+- Defining routes
+- Using and passing parameters in routes
 
 # 1.6 Validações de Formulários
 
