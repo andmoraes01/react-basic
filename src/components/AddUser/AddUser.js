@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import User from '../User/User';
 import './AddUser.css'
 
 
@@ -7,12 +8,11 @@ function AddUser() {
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-
+  const [users, setUsers] = useState([]);
 
   const onSubmitHandler = event => {
     event.preventDefault();
     const user = { name, lastName, email };
-
     fetch('https://reqres.in/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -21,10 +21,14 @@ function AddUser() {
       .then(response => {
         if (response.ok) {
           resetUserData();
-          //criar componente de alerta um componente separado e personalizado
-          alert('Usuário cadastrado com sucesso !');      
+          return response.json();
         }
       })
+      .then(data => {        
+        setUsers(prevUsers => [...prevUsers, data]); 
+        alert('Usuário cadastrado com sucesso!');
+      })
+      .catch(error => console.log(error));
   }
 
   const resetUserData = () => {
@@ -36,7 +40,7 @@ function AddUser() {
   return (
     <div className="AddUser">
       <h2>Adicionar Usuário</h2>
-      <form onSubmit={onSubmitHandler}>
+      <form onSubmit={onSubmitHandler}>      
         <div className="Line">
           <div className="Column">
             <label>Nome</label>
@@ -75,6 +79,11 @@ function AddUser() {
           Adicionar
         </button>
       </form>
+      
+      {users.map(user => (
+        <User key={user.id} user={user} />
+      ))}
+
     </div>
   )
 }

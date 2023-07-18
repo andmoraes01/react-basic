@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import AddUser from '../AddUser/AddUser'
 import User from '../User/User'
 
-function Users () {
+function Users() {
 
   const [users, setUsers] = useState([])
 
@@ -23,7 +23,7 @@ function Users () {
         setUsers(usersDataFormatedForMyStateFormat)
       })
   }, [])
-  
+
   const removeUser = user => {
     if (window.confirm(`Tem certeza que deseja remover "${user.name} ${user.lastName}"?`)) {
       fetch(`https://reqres.in/api/users/${user.id}`, {

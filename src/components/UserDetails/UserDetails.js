@@ -24,7 +24,7 @@ function UserDetails() {
             })
     }, [userId])
 
-    if(user.name != undefined) {
+    if(user.name !== undefined) {
         return <>
             <h1>{user.name} {user.lastName}</h1>
             <img src={user.photo} alt={user.name}/>
