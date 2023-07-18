@@ -1,14 +1,10 @@
 import React, { useState, useEffect } from 'react'
-
-import AddUser from '../AddUser/AddUser'
 import User from '../User/User'
 
 function Users() {
-
   const [users, setUsers] = useState([])
 
   useEffect(() => {
-    //Implementando o método GET:
     fetch('https://reqres.in/api/users')
       .then(response => response.json())
       .then(usersData => {
@@ -37,16 +33,16 @@ function Users() {
     }
   }
 
-    return (
-      <>
-        {users.map(user => (
-          <User key={user.id}
-            user={user}
-            removeUser={() => removeUser(user)}
-          />
-        ))}
-      </>
-    )  
+  return (
+    <>
+      {users.map(user => (
+        <User key={user.id}
+          user={user}
+          removeUser={() => removeUser(user)}
+        />
+      ))}
+    </>
+  )
 }
 
 export default Users

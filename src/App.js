@@ -114,9 +114,9 @@ class App extends Component {
               <div> <Home /> </div>
             } />
 
-            <Route path="usuarios/:userId" element ={
-              <UserDetails/> 
-            }/>
+            <Route path="usuarios/:userId" element={
+              <UserDetails />
+            } />
 
             <Route path="/usuarios" element={
               <div className="users"> <Users />

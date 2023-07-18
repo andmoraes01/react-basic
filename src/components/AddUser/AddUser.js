@@ -2,9 +2,7 @@ import React, { useState } from 'react'
 import User from '../User/User';
 import './AddUser.css'
 
-
 function AddUser() {
-
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
@@ -24,8 +22,8 @@ function AddUser() {
           return response.json();
         }
       })
-      .then(data => {        
-        setUsers(prevUsers => [...prevUsers, data]); 
+      .then(data => {
+        setUsers(prevUsers => [...prevUsers, data]);
         alert('Usuário cadastrado com sucesso!');
       })
       .catch(error => console.log(error));
@@ -40,7 +38,7 @@ function AddUser() {
   return (
     <div className="AddUser">
       <h2>Adicionar Usuário</h2>
-      <form onSubmit={onSubmitHandler}>      
+      <form onSubmit={onSubmitHandler}>
         <div className="Line">
           <div className="Column">
             <label>Nome</label>
@@ -79,7 +77,7 @@ function AddUser() {
           Adicionar
         </button>
       </form>
-      
+
       {users.map(user => (
         <User key={user.id} user={user} />
       ))}
