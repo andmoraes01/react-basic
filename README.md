@@ -1,6 +1,5 @@
 # React Project
 A project to practice react concepts. Here we will learn and test all studies carried out.
-DESCREVER AQUI O PROJETO, COLOCAR AS IMAGENS DE CADA PÁGINA, EXPLICANDO O SISTEMA COMO UM TODO, DE MANEIRA RESUMIDA.
 
 The application was based on requests on API 'https://reqres.in/api'. 
 So we have four options on menu below header, with options: "Inicio", "Usuários Cadastrados", "Adicionar Usuários", "Comentários".
@@ -62,4 +61,5 @@ manipulate effects using Effect Hook.
 - Using and passing parameters in routes
 
 # 1.7 Deploy
-Acess application by link.
+Acess application by link. 
+https://react-basic-taupe.vercel.app/
