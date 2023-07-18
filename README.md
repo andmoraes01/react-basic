@@ -62,3 +62,4 @@ manipulate effects using Effect Hook.
 - Using and passing parameters in routes
 
 # 1.7 Deploy
+Acess application by link.
