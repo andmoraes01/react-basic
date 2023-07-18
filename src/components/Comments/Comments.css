@@ -1,4 +1,4 @@
-.Comments{
+.Comments {
     background-color: burlywood;
     margin-bottom: 2rem;
     border: 1px solid #555;
@@ -6,7 +6,7 @@
     width: 99%;
     padding-left: 12px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;    
+    transition: transform 0.3s ease;
 }
 
 .Comments:hover {
@@ -51,5 +51,3 @@
     cursor: pointer;
     padding-right: 38px;
 }
-
-
