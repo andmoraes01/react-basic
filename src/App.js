@@ -85,7 +85,7 @@ class App extends Component {
 
           <h1 className="header">
             <img className="custom-logo" src={logo} alt="Logo" />
-            Meu projeto
+            React Project
             <img className="custom-logo right-logo-padding" src={logo} alt="Logo" />
           </h1>
 
