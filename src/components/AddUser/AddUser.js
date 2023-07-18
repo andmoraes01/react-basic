@@ -1,31 +1,37 @@
 import React, { useState } from 'react'
+import User from '../User/User';
 import './AddUser.css'
 
 
-function AddUser(props) {
+function AddUser() {
 
   const [name, setName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-
+  const [users, setUsers] = useState([]);
 
   const onSubmitHandler = event => {
     event.preventDefault();
-    const user = {name, lastName, email};
-
+    const user = { name, lastName, email };
     fetch('https://reqres.in/api/users', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(user)
     })
-      .then(response => response.json())
-      .then(addUsersData => {
-        resetUserData();
-        props.addUser(addUsersData);
+      .then(response => {
+        if (response.ok) {
+          resetUserData();
+          return response.json();
+        }
       })
+      .then(data => {        
+        setUsers(prevUsers => [...prevUsers, data]); 
+        alert('Usuário cadastrado com sucesso!');
+      })
+      .catch(error => console.log(error));
   }
 
-  const resetUserData = () =>{
+  const resetUserData = () => {
     setName('')
     setLastName('')
     setEmail('')
@@ -34,7 +40,7 @@ function AddUser(props) {
   return (
     <div className="AddUser">
       <h2>Adicionar Usuário</h2>
-      <form onSubmit={onSubmitHandler}>
+      <form onSubmit={onSubmitHandler}>      
         <div className="Line">
           <div className="Column">
             <label>Nome</label>
@@ -73,6 +79,11 @@ function AddUser(props) {
           Adicionar
         </button>
       </form>
+      
+      {users.map(user => (
+        <User key={user.id} user={user} />
+      ))}
+
     </div>
   )
 }

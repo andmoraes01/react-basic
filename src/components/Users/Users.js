@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react'
 import AddUser from '../AddUser/AddUser'
 import User from '../User/User'
 
-function Users () {
+function Users() {
 
   const [users, setUsers] = useState([])
 
@@ -23,10 +23,6 @@ function Users () {
         setUsers(usersDataFormatedForMyStateFormat)
       })
   }, [])
-  
-  const addUser = user => {
-    setUsers(oldUsers => [...oldUsers, user])
-  }
 
   const removeUser = user => {
     if (window.confirm(`Tem certeza que deseja remover "${user.name} ${user.lastName}"?`)) {
@@ -43,8 +39,6 @@ function Users () {
 
     return (
       <>
-        <AddUser addUser={addUser} />
-
         {users.map(user => (
           <User key={user.id}
             user={user}
