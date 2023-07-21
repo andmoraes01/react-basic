@@ -60,6 +60,6 @@ manipulate effects using Effect Hook.
 - Defining routes
 - Using and passing parameters in routes
 
-# 1.7 Deploy
+# 1.5 Deploy
 Acess application by link. 
 https://react-basic-taupe.vercel.app/
